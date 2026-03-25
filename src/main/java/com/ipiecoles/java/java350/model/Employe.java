@@ -66,7 +66,7 @@ public class Employe {
             case FRIDAY: if(d.isLeapYear()) var =  var + 2; else var =  var + 1; break;
             case SATURDAY: var = var + 1; break;
             default:
-                break;
+                throw new IllegalStateException("Jour inattendu : " + LocalDate.of(d.getYear(), 1, 1).getDayOfWeek());
         }
         int monInt = (int) Entreprise.joursFeries(d).stream().filter(localDate -> localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
         return (int) Math.ceil((i1 - Entreprise.NB_JOURS_MAX_FORFAIT - var - Entreprise.NB_CONGES_BASE - monInt) * tempsPartiel);
