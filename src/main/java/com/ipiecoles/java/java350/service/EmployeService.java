@@ -12,11 +12,16 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityExistsException;
 import java.time.LocalDate;
 
+@RequiredArgsConstructor
 @Service
 public class EmployeService {
 
-    @Autowired
-    private EmployeRepository employeRepository;
+    private final EmployeRepository employeRepository;
+
+    public EmployeService(EmployeRepository employeRepository) {
+        this.employeRepository = employeRepository;
+    }
+
 
     /**
      * Méthode enregistrant un nouvel employé dans l'entreprise
