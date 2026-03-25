@@ -60,16 +60,16 @@ public class Employe {
 
     public Integer getNbRtt(LocalDate d){
         int i1 = d.isLeapYear() ? 365 : 366;
-        int var = 104;
+        
         switch (LocalDate.of(d.getYear(),1,1).getDayOfWeek()){
-            case THURSDAY: if(d.isLeapYear()) var =  var + 1; break;
-            case FRIDAY: if(d.isLeapYear()) var =  var + 2; else var =  var + 1; break;
-            case SATURDAY: var = var + 1; break;
+            case THURSDAY: if(d.isLeapYear()) day =  day + 1; break;
+            case FRIDAY: if(d.isLeapYear()) day =  day + 2; else day =  day + 1; break;
+            case SATURDAY: day = day + 1; break;
             default:
                 throw new IllegalStateException("Jour inattendu : " + LocalDate.of(d.getYear(), 1, 1).getDayOfWeek());
         }
         int monInt = (int) Entreprise.joursFeries(d).stream().filter(localDate -> localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
-        return (int) Math.ceil((i1 - Entreprise.NB_JOURS_MAX_FORFAIT - var - Entreprise.NB_CONGES_BASE - monInt) * tempsPartiel);
+        return (int) Math.ceil((i1 - Entreprise.NB_JOURS_MAX_FORFAIT - day - Entreprise.NB_CONGES_BASE - monInt) * tempsPartiel);
     }
 
     /**
